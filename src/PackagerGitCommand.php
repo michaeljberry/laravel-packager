@@ -70,7 +70,7 @@ class PackagerGitCommand extends Command
             $vendor = $this->argument('vendor');
             $name = $this->argument('name');
         }
-        $path = getcwd().'/packages/';
+        $path = getcwd().'/vendor/';
         $fullPath = $path.$vendor.'/'.$name;
 //        $requirement = '"psr-4": { "'.$vendor.'\\\\'.$name.'\\\\": "packages/'.$vendor.'/'.$name.'/src",';
 //        $appConfigLine = 'App\Providers\RouteServiceProvider::class,'.$vendor.'\\'.$name.'\\'.$name.'ServiceProvider::class,';

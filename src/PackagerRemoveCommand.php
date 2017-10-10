@@ -59,7 +59,7 @@ class PackagerRemoveCommand extends Command
         // Common variables
         $vendor = $this->argument('vendor');
         $name = $this->argument('name');
-        $path = getcwd().'/packages/';
+        $path = getcwd().'/vendor/';
         $fullPath = $path.$vendor.'/'.$name;
         $requirement = '"'.$vendor.'\\\\'.$name.'\\\\": "packages/'.$vendor.'/'.$name.'/src",';
         $appConfigLine = $vendor.'\\'.$name.'\\'.$name.'ServiceProvider::class,';

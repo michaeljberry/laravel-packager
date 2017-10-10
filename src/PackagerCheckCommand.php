@@ -44,7 +44,7 @@ class PackagerCheckCommand extends Command
         $formatter = new SimpleFormatter($this->getHelperSet()->get('formatter'));
         $vendor = $this->argument('vendor');
         $name = $this->argument('name');
-        $lockfile = getcwd().'/packages/'.$vendor.'/'.$name.'/composer.lock';
+        $lockfile = getcwd().'/vendor/'.$vendor.'/'.$name.'/composer.lock';
         $vulnerabilities = $checker->check($lockfile);
         
         return $formatter->displayResults($this->output, $lockfile, $vulnerabilities);

@@ -114,7 +114,7 @@ class PackagerHelper
      */
     public function removeDir($path)
     {
-        if ($path == 'packages' || $path == '/') {
+        if ($path == 'vendor' || $path == '/') {
             return false;
         }
 

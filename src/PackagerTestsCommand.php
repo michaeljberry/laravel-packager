@@ -80,7 +80,7 @@ class PackagerTestsCommand extends Command
         else {
             $vendor = $this->argument('vendor');
             $name = $this->argument('name');
-            $path = base_path('packages/'.$vendor.'/'.$name.'/tests');
+            $path = base_path('vendor/'.$vendor.'/'.$name.'/tests');
 
             if($this->files->exists($path)) {   
                 $this->info('Moving tests for the package: '.$vendor.'/'.$name);

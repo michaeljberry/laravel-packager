@@ -65,7 +65,7 @@ class PackagerNewCommand extends Command
             $vendor = $this->argument('vendor');
             $name = $this->argument('name');
         }
-        $path = getcwd().'/packages/';
+        $path = getcwd().'/vendor/';
         $fullPath = $path.$vendor.'/'.$name;
         $requireSupport = '"illuminate/support": "~5.1",
         "php"';
