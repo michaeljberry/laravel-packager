@@ -66,7 +66,7 @@ class PackagerNewCommand extends Command
             $name = $this->argument('name');
         }
         $path = getcwd().'/vendor/';
-        $fullPath = $path.$vendor.'/'.$name;
+        $fullPath = $path.strtolower($vendor).'/'.$name;
         $requireSupport = '"illuminate/support": "~5.1",
         "php"';
 //        $requirement = '"psr-4": {"'.$vendor.'\\\\'.$name.'\\\\": "packages/'.$vendor.'/'.$name.'/src",';
@@ -74,7 +74,7 @@ class PackagerNewCommand extends Command
 
         // Start creating the package
         $this->info('Creating package '.$vendor.'\\'.$name.'...');
-        $this->helper->checkExistingPackage($path, $vendor, $name);
+        $this->helper->checkExistingPackage($path, strtolower($vendor), $name);
         $bar->advance();
 
         // Create the package directory
@@ -84,15 +84,15 @@ class PackagerNewCommand extends Command
 
         // Create the vendor directory
         $this->info('Creating vendor...');
-        $this->helper->makeDir($path.$vendor);
+        $this->helper->makeDir($path.strtolower($vendor));
         $bar->advance();
 
         // Get the skeleton repo from the PHP League
         $this->info('Downloading skeleton...');
         $this->helper->download($zipFile = $this->helper->makeFilename(), 'http://github.com/thephpleague/skeleton/archive/master.zip')
-             ->extract($zipFile, $path.$vendor)
+             ->extract($zipFile, $path.strtolower($vendor))
              ->cleanUp($zipFile);
-        rename($path.$vendor.'/skeleton-master', $fullPath);
+        rename($path.strtolower($vendor).'/skeleton-master', $fullPath);
         $bar->advance();
 
         // Creating a Laravel Service Provider in the src directory
