@@ -86,7 +86,7 @@ class PackagerHelper
      */
     public function checkExistingPackage($path, $vendor, $name)
     {
-        if (is_dir($path.$vendor.'/'.$name)) {
+        if (is_dir($path.strtolower($vendor).'/'.strtolower($name))) {
             throw new RuntimeException('Package already exists');
         }
     }
@@ -100,8 +100,8 @@ class PackagerHelper
      */
     public function makeDir($path)
     {
-        if (!is_dir($path)) {
-            return mkdir($path, 0777, true);
+        if (!is_dir(strtolower($path))) {
+            return mkdir(strtolower($path), 0777, true);
         }
     }
 
@@ -169,7 +169,7 @@ class PackagerHelper
     {
         $archive = new ZipArchive;
         $archive->open($zipFile);
-        $archive->extractTo($directory);
+        $archive->extractTo(strtolower($directory));
         $archive->close();
         return $this;
     }

@@ -53,16 +53,14 @@ class PackagerRemoveCommand extends Command
     public function handle()
     {
         // Start the progress bar
-        $bar = $this->helper->barSetup($this->output->createProgressBar(4));
+        $bar = $this->helper->barSetup($this->output->createProgressBar(3));
         $bar->start();
 
         // Common variables
         $vendor = $this->argument('vendor');
         $name = $this->argument('name');
         $path = getcwd().'/vendor/';
-        $fullPath = $path.$vendor.'/'.$name;
-        $requirement = '"'.$vendor.'\\\\'.$name.'\\\\": "packages/'.$vendor.'/'.$name.'/src",';
-        $appConfigLine = $vendor.'\\'.$name.'\\'.$name.'ServiceProvider::class,';
+        $fullPath = $path.strtolower($vendor).'/'.strtolower($name);
 
         // Start removing the package
         $this->info('Removing package '.$vendor.'\\'.$name.'...');
@@ -76,16 +74,10 @@ class PackagerRemoveCommand extends Command
         // Remove the vendor directory, if agreed to
         if ($this->confirm('Do you want to remove the vendor directory? [y|N]')) {
             $this->info('removing vendor directory...');
-            $this->helper->removeDir($path.$vendor);
+            $this->helper->removeDir($path.strtolower($vendor));
         } else {
             $this->info('Continuing...');
         }
-        $bar->advance();
-
-        // Remove it from composer.json and app config
-        $this->info('Removing package from composer and app config...');
-        $this->helper->replaceAndSave(getcwd().'/composer.json', $requirement, '');
-        $this->helper->replaceAndSave(getcwd().'/config/app.php', $appConfigLine, '');
         $bar->advance();
 
         // Finished removing the package, end of the progress bar

@@ -71,26 +71,26 @@ class PackagerGitCommand extends Command
             $name = $this->argument('name');
         }
         $path = getcwd().'/vendor/';
-        $fullPath = $path.$vendor.'/'.$name;
+        $fullPath = $path.strtolower($vendor).'/'.strtolower($name);
 
         // Start creating the package
         $this->info('Creating package '.$vendor.'\\'.$name.'...');
-            $this->helper->checkExistingPackage($path, $vendor, $name);
+            $this->helper->checkExistingPackage($path, strtolower($vendor), strtolower($name));
         $bar->advance();
 
         // Create the package directory
         $this->info('Creating packages directory...');
-            $this->helper->makeDir($path);
+        $this->helper->makeDir($path);
         $bar->advance();
 
         // Create the vendor and package directory
         $this->info('Creating vendor...');
-            $this->helper->makeDir($fullPath);
+        $this->helper->makeDir($fullPath);
         $bar->advance();
 
         // Clone the repository
         $this->info('Cloning repository...');
-            exec("git clone $source $fullPath");
+        exec("git clone $source $fullPath");
         $bar->advance();
 
         // Finished creating the package, end of the progress bar

@@ -71,11 +71,11 @@ class PackagerGetCommand extends Command
             $name = $this->argument('name');
         }
         $path = getcwd().'/vendor/';
-        $fullPath = $path.$vendor.'/'.$name;
+        $fullPath = $path.strtolower($vendor).'/'.strtolower($name);
 
         // Start creating the package
         $this->info('Creating package '.$vendor.'\\'.$name.'...');
-        $this->helper->checkExistingPackage($path, $vendor, $name);
+        $this->helper->checkExistingPackage($path, strtolower($vendor), strtolower($name));
         $bar->advance();
 
         // Create the package directory
@@ -85,15 +85,15 @@ class PackagerGetCommand extends Command
 
         // Create the vendor directory
         $this->info('Creating vendor...');
-        $this->helper->makeDir($path.$vendor);
+        $this->helper->makeDir($path.strtolower($vendor));
         $bar->advance();
 
         // Get the skeleton repo from the PHP League
         $this->info('Downloading from Github...');
         $this->helper->download($zipFile = $this->helper->makeFilename(), $origin)
-             ->extract($zipFile, $path.$vendor)
+             ->extract($zipFile, $path.strtolower($vendor))
              ->cleanUp($zipFile);
-        rename($path.$vendor.'/'.$pieces[4]. '-'.$this->option('branch'), $fullPath);
+        rename($path.strtolower($vendor).'/'.$pieces[4]. '-'.$this->option('branch'), $fullPath);
         $bar->advance();
 
         // Finished creating the package, end of the progress bar
