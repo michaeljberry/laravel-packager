@@ -53,7 +53,7 @@ class PackagerNewCommand extends Command
     public function handle()
     {
         // Start the progress bar
-        $bar = $this->helper->barSetup($this->output->createProgressBar(7));
+        $bar = $this->helper->barSetup($this->output->createProgressBar(6));
         $bar->start();
 
         // Common variables
@@ -69,11 +69,8 @@ class PackagerNewCommand extends Command
         $fullPath = $path.$vendor.'/'.$name;
         $requireSupport = '"illuminate/support": "~5.1",
         "php"';
-        $requirement = '"psr-4": {
-            "'.$vendor.'\\\\'.$name.'\\\\": "packages/'.$vendor.'/'.$name.'/src",';
-        $appConfigLine = 'App\Providers\RouteServiceProvider::class,
-
-        '.$vendor.'\\'.$name.'\\'.$name.'ServiceProvider::class,';
+//        $requirement = '"psr-4": {"'.$vendor.'\\\\'.$name.'\\\\": "packages/'.$vendor.'/'.$name.'/src",';
+//        $appConfigLine = 'App\Providers\RouteServiceProvider::class,'.$vendor.'\\'.$name.'\\'.$name.'ServiceProvider::class,';
 
         // Start creating the package
         $this->info('Creating package '.$vendor.'\\'.$name.'...');
@@ -143,11 +140,11 @@ class PackagerNewCommand extends Command
 
 
         // Add it to composer.json
-        $this->info('Adding package to composer and app...');
-            $this->helper->replaceAndSave(getcwd().'/composer.json', '"psr-4": {', $requirement);
-            // And add it to the providers array in config/app.php
-            $this->helper->replaceAndSave(getcwd().'/config/app.php', 'App\Providers\RouteServiceProvider::class,', $appConfigLine);
-        $bar->advance();
+//        $this->info('Adding package to composer and app...');
+//            $this->helper->replaceAndSave(getcwd().'/composer.json', '"psr-4": {', $requirement);
+//            // And add it to the providers array in config/app.php
+//            $this->helper->replaceAndSave(getcwd().'/config/app.php', 'App\Providers\RouteServiceProvider::class,', $appConfigLine);
+//        $bar->advance();
 
         // Finished creating the package, end of the progress bar
         $bar->finish();
