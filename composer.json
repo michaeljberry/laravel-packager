@@ -1,5 +1,5 @@
 {
-    "name": "jeroen-g/laravel-packager",
+    "name": "michaeljberry/laravel-packager",
     "description": "A cli tool for creating Laravel packages.",
     "keywords": [
         "Packager",
@@ -8,13 +8,13 @@
         "skeleton",
         "Github"
     ],
-    "homepage": "https://github.com/Jeroen-G/laravel-packager",
+    "homepage": "https://github.com/michaeljberry/laravel-packager",
     "license": "EUPL-1.1",
     "authors": [
         {
-            "name": "JeroenG",
-            "email": "jeroengjeroeng@gmail.com",
-            "homepage": "https://github.com/Jeroen-G"
+            "name": "michaeljberry",
+            "email": "michael@michaeljberry.com",
+            "homepage": "https://github.com/michaeljberry"
         }
     ],
     "require": {
@@ -26,13 +26,13 @@
     },
     "autoload": {
         "psr-4": {
-            "JeroenG\\Packager\\": "src"
+            "michaeljberry\\Packager\\": "src"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "JeroenG\\Packager\\PackagerServiceProvider"
+                "michaeljberry\\Packager\\PackagerServiceProvider"
             ]
         }
     }
