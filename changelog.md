@@ -2,6 +2,11 @@
 
 All Notable changes to Packager will be documented in this file.
 
+## Version 1.7
+
+### Added
+- Compatibility for created packages for Laravel 5.5
+
 ## Version 1.6.x
 
 ### Added
