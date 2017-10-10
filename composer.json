@@ -26,13 +26,13 @@
     },
     "autoload": {
         "psr-4": {
-            "michaeljberry\\Packager\\": "src"
+            "MichaelJBerry\\Packager\\": "src"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "michaeljberry\\Packager\\PackagerServiceProvider"
+                "MichaelJBerry\\Packager\\PackagerServiceProvider"
             ]
         }
     }

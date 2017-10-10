@@ -1,6 +1,6 @@
 <?php
 
-namespace JeroenG\Packager;
+namespace MichaelJBerry\Packager;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -8,10 +8,10 @@ use Illuminate\Support\ServiceProvider;
  * This is the service provider.
  *
  * Place the line below in the providers array inside app/config/app.php
- * <code>'JeroenG\Packager\PackagerServiceProvider',</code>
+ * <code>'MichaelJBerry\Packager\PackagerServiceProvider',</code>
  *
  * @package Packager
- * @author JeroenG
+ * @author MichaelJBerry
  * 
  **/
 class PackagerServiceProvider extends ServiceProvider
@@ -29,13 +29,13 @@ class PackagerServiceProvider extends ServiceProvider
      * @var bool
      */
     protected $commands = [
-        'JeroenG\Packager\PackagerNewCommand',
-        'JeroenG\Packager\PackagerRemoveCommand',
-        'JeroenG\Packager\PackagerGetCommand',
-        'JeroenG\Packager\PackagerGitCommand',
-        'JeroenG\Packager\PackagerListCommand',
-        'JeroenG\Packager\PackagerTestsCommand',
-        'JeroenG\Packager\PackagerCheckCommand',
+        'MichaelJBerry\Packager\PackagerNewCommand',
+        'MichaelJBerry\Packager\PackagerRemoveCommand',
+        'MichaelJBerry\Packager\PackagerGetCommand',
+        'MichaelJBerry\Packager\PackagerGitCommand',
+        'MichaelJBerry\Packager\PackagerListCommand',
+        'MichaelJBerry\Packager\PackagerTestsCommand',
+        'MichaelJBerry\Packager\PackagerCheckCommand',
     ];
 
     /**

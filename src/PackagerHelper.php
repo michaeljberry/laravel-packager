@@ -1,6 +1,6 @@
 <?php
 
-namespace JeroenG\Packager;
+namespace MichaelJBerry\Packager;
 
 use ZipArchive;
 use RuntimeException;
@@ -12,7 +12,7 @@ use Illuminate\Filesystem\Filesystem;
  * Helper functions for the Packager commands.
  *
  * @package Packager
- * @author JeroenG
+ * @author MichaelJBerry
  * 
  **/
 class PackagerHelper

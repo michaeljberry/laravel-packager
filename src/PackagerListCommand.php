@@ -1,6 +1,6 @@
 <?php
 
-namespace JeroenG\Packager;
+namespace MichaelJBerry\Packager;
 
 use Illuminate\Console\Command;
 
@@ -8,7 +8,7 @@ use Illuminate\Console\Command;
  * List all locally installed packages.
  *
  * @package Packager
- * @author JeroenG
+ * @author MichaelJBerry
  *
  **/
 class PackagerListCommand extends Command

@@ -1,15 +1,15 @@
 <?php
 
-namespace JeroenG\Packager;
+namespace MichaelJBerry\Packager;
 
 use Illuminate\Console\Command;
-use JeroenG\Packager\PackagerHelper;
+use MichaelJBerry\Packager\PackagerHelper;
 
 /**
  * Get an existing package from a remote Github repository.
  *
  * @package Packager
- * @author JeroenG
+ * @author MichaelJBerry
  * 
  **/
 class PackagerGetCommand extends Command

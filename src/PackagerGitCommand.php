@@ -1,15 +1,15 @@
 <?php
 
-namespace JeroenG\Packager;
+namespace MichaelJBerry\Packager;
 
 use Illuminate\Console\Command;
-use JeroenG\Packager\PackagerHelper;
+use MichaelJBerry\Packager\PackagerHelper;
 
 /**
  * Get an existing package from a remote Github repository with its git repository.
  *
  * @package Packager
- * @author JeroenG
+ * @author MichaelJBerry
  * 
  **/
 class PackagerGitCommand extends Command
@@ -56,7 +56,7 @@ class PackagerGitCommand extends Command
     public function handle()
     {
         // Start the progress bar
-        $bar = $this->helper->barSetup($this->output->createProgressBar(5));
+        $bar = $this->helper->barSetup($this->output->createProgressBar(4));
         $bar->start();
 
         // Common variables
@@ -72,11 +72,8 @@ class PackagerGitCommand extends Command
         }
         $path = getcwd().'/packages/';
         $fullPath = $path.$vendor.'/'.$name;
-        $requirement = '"psr-4": {
-            "'.$vendor.'\\\\'.$name.'\\\\": "packages/'.$vendor.'/'.$name.'/src",';
-        $appConfigLine = 'App\Providers\RouteServiceProvider::class,
-
-        '.$vendor.'\\'.$name.'\\'.$name.'ServiceProvider::class,';
+//        $requirement = '"psr-4": { "'.$vendor.'\\\\'.$name.'\\\\": "packages/'.$vendor.'/'.$name.'/src",';
+//        $appConfigLine = 'App\Providers\RouteServiceProvider::class,'.$vendor.'\\'.$name.'\\'.$name.'ServiceProvider::class,';
 
         // Start creating the package
         $this->info('Creating package '.$vendor.'\\'.$name.'...');
@@ -99,11 +96,11 @@ class PackagerGitCommand extends Command
         $bar->advance();
 
         // Add it to composer.json
-        $this->info('Adding package to composer and app...');
-            $this->helper->replaceAndSave(getcwd().'/composer.json', '"psr-4": {', $requirement);
-            // And add it to the providers array in config/app.php
-            $this->helper->replaceAndSave(getcwd().'/config/app.php', 'App\Providers\RouteServiceProvider::class,', $appConfigLine);
-        $bar->advance();
+//        $this->info('Adding package to composer and app...');
+//            $this->helper->replaceAndSave(getcwd().'/composer.json', '"psr-4": {', $requirement);
+//            // And add it to the providers array in config/app.php
+//            $this->helper->replaceAndSave(getcwd().'/config/app.php', 'App\Providers\RouteServiceProvider::class,', $appConfigLine);
+//        $bar->advance();
 
         // Finished creating the package, end of the progress bar
         $bar->finish();

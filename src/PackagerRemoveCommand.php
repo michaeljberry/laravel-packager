@@ -1,15 +1,15 @@
 <?php
 
-namespace JeroenG\Packager;
+namespace MichaelJBerry\Packager;
 
 use Illuminate\Console\Command;
-use JeroenG\Packager\PackagerHelper;
+use MichaelJBerry\Packager\PackagerHelper;
 
 /**
  * remove an existing package.
  *
  * @package Packager
- * @author JeroenG
+ * @author MichaelJBerry
  * 
  **/
 class PackagerRemoveCommand extends Command
