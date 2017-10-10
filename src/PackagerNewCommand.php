@@ -74,77 +74,68 @@ class PackagerNewCommand extends Command
 
         // Start creating the package
         $this->info('Creating package '.$vendor.'\\'.$name.'...');
-            $this->helper->checkExistingPackage($path, $vendor, $name);
+        $this->helper->checkExistingPackage($path, $vendor, $name);
         $bar->advance();
 
         // Create the package directory
         $this->info('Creating packages directory...');
-            $this->helper->makeDir($path);
+        $this->helper->makeDir($path);
         $bar->advance();
 
         // Create the vendor directory
         $this->info('Creating vendor...');
-            $this->helper->makeDir($path.$vendor);
+        $this->helper->makeDir($path.$vendor);
         $bar->advance();
 
         // Get the skeleton repo from the PHP League
         $this->info('Downloading skeleton...');
-            $this->helper->download($zipFile = $this->helper->makeFilename(), 'http://github.com/thephpleague/skeleton/archive/master.zip')
-                 ->extract($zipFile, $path.$vendor)
-                 ->cleanUp($zipFile);
-            rename($path.$vendor.'/skeleton-master', $fullPath);
+        $this->helper->download($zipFile = $this->helper->makeFilename(), 'http://github.com/thephpleague/skeleton/archive/master.zip')
+             ->extract($zipFile, $path.$vendor)
+             ->cleanUp($zipFile);
+        rename($path.$vendor.'/skeleton-master', $fullPath);
         $bar->advance();
 
         // Creating a Laravel Service Provider in the src directory
         $this->info('Creating service provider...');
-            $newProvider = $fullPath.'/src/'.$name.'ServiceProvider.php';
-            $this->helper->replaceAndSave(
-                \Config::get('packager.service_provider_stub', __DIR__.'/ServiceProvider.stub'),
-                ['{{vendor}}', '{{name}}'],
-                [$vendor, $name],
-                $newProvider
-            );
+        $newProvider = $fullPath.'/src/'.$name.'ServiceProvider.php';
+        $this->helper->replaceAndSave(
+            \Config::get('packager.service_provider_stub', __DIR__.'/ServiceProvider.stub'),
+            ['{{vendor}}', '{{name}}'],
+            [$vendor, $name],
+            $newProvider
+        );
         $bar->advance();
 
         // Replacing skeleton placeholders
         $this->info('Replacing skeleton placeholders...');
-            $this->helper->replaceAndSave($fullPath.'/src/SkeletonClass.php', 'namespace League\Skeleton;', 'namespace '.$vendor.'\\'.$name.';');
-            $search =   [
-                ':vendor',
-                ':package_name',
-                ':vendor\\\\:package_name\\\\',
-                ':vendor/:package_name',
-                'thephpleague/:package_name',
-                'league/:package_name',
-                '"php"',
-                'League\\\\Skeleton\\\\',
-                'League\\\\Skeleton\\\\Test\\\\'
-            ];
-            $replace =  [
-                $vendor,
-                $name,
-                $vendor.'\\\\'.$name.'\\\\',
-                $vendor.'/'.$name,
-                $vendor.'/'.$name,
-                $vendor.'/'.$name,
-                $requireSupport,
-                $vendor.'\\\\'.$name.'\\\\',
-                $vendor.'\\\\'.$name.'\\\\Test\\\\'
-            ];
-            $this->helper->replaceAndSave($fullPath.'/composer.json', $search, $replace);
-            if ($this->option('i')) {
-                $this->interactiveReplace($vendor, $name, $fullPath);
-            }
+        $this->helper->replaceAndSave($fullPath.'/src/SkeletonClass.php', 'namespace League\Skeleton;', 'namespace '.$vendor.'\\'.$name.';');
+        $search =   [
+            ':vendor',
+            ':package_name',
+            ':vendor\\\\:package_name\\\\',
+            ':vendor/:package_name',
+            'thephpleague/:package_name',
+            'league/:package_name',
+            '"php"',
+            'League\\\\Skeleton\\\\',
+            'League\\\\Skeleton\\\\Test\\\\'
+        ];
+        $replace =  [
+            $vendor,
+            $name,
+            $vendor.'\\\\'.$name.'\\\\',
+            $vendor.'/'.$name,
+            $vendor.'/'.$name,
+            $vendor.'/'.$name,
+            $requireSupport,
+            $vendor.'\\\\'.$name.'\\\\',
+            $vendor.'\\\\'.$name.'\\\\Test\\\\'
+        ];
+        $this->helper->replaceAndSave($fullPath.'/composer.json', $search, $replace);
+        if ($this->option('i')) {
+            $this->interactiveReplace($vendor, $name, $fullPath);
+        }
         $bar->advance();
-
-
-
-        // Add it to composer.json
-//        $this->info('Adding package to composer and app...');
-//            $this->helper->replaceAndSave(getcwd().'/composer.json', '"psr-4": {', $requirement);
-//            // And add it to the providers array in config/app.php
-//            $this->helper->replaceAndSave(getcwd().'/config/app.php', 'App\Providers\RouteServiceProvider::class,', $appConfigLine);
-//        $bar->advance();
 
         // Finished creating the package, end of the progress bar
         $bar->finish();
@@ -173,14 +164,14 @@ class PackagerNewCommand extends Command
                 'MIT',
                 'https://github.com/'.$vendor.'/'.$name,
             ];
-            $replace =  [
-                $author,
-                $authorEmail,
-                $authorSite,
-                $description,
-                $license,
-                $homepage,
-            ];
-            $this->helper->replaceAndSave($fullPath.'/composer.json', $search, $replace);
+        $replace =  [
+            $author,
+            $authorEmail,
+            $authorSite,
+            $description,
+            $license,
+            $homepage,
+        ];
+        $this->helper->replaceAndSave($fullPath.'/composer.json', $search, $replace);
     }
 }

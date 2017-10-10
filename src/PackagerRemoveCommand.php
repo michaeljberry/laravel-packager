@@ -70,7 +70,7 @@ class PackagerRemoveCommand extends Command
 
         // remove the package directory
         $this->info('Removing packages directory...');
-            $this->helper->removeDir($fullPath);
+        $this->helper->removeDir($fullPath);
         $bar->advance();
 
         // Remove the vendor directory, if agreed to
@@ -84,8 +84,8 @@ class PackagerRemoveCommand extends Command
 
         // Remove it from composer.json and app config
         $this->info('Removing package from composer and app config...');
-            $this->helper->replaceAndSave(getcwd().'/composer.json', $requirement, '');
-            $this->helper->replaceAndSave(getcwd().'/config/app.php', $appConfigLine, '');
+        $this->helper->replaceAndSave(getcwd().'/composer.json', $requirement, '');
+        $this->helper->replaceAndSave(getcwd().'/config/app.php', $appConfigLine, '');
         $bar->advance();
 
         // Finished removing the package, end of the progress bar

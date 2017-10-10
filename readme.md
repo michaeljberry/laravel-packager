@@ -8,19 +8,14 @@ This package provides you with a simple tool to set up a new package and it will
 
 ## Installation
 
+#### Requirements
+- Laravel 5.5+
+
 Via Composer
 
 ```bash
 $ composer require michaeljberry/laravel-packager
 ```
-
-If you do not run Laravel 5.5 (or higher), then add the service provider in `config/app.php`:
-
-```php
-michaeljberry\Packager\PackagerServiceProvider::class,
-```
-
-If you do run the package on Laravel 5.5+, [package auto-discovery](https://medium.com/@taylorotwell/package-auto-discovery-in-laravel-5-5-ea9e3ab20518) takes care of the magic of adding the service provider.
 
 Optional you can publish the configuration to provide an own service provider stub.
 
