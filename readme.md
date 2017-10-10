@@ -11,13 +11,13 @@ This package provides you with a simple tool to set up a new package and it will
 Via Composer
 
 ```bash
-$ composer require jeroen-g/laravel-packager
+$ composer require michaeljberry/laravel-packager
 ```
 
 If you do not run Laravel 5.5 (or higher), then add the service provider in `config/app.php`:
 
 ```php
-JeroenG\Packager\PackagerServiceProvider::class,
+michaeljberry\Packager\PackagerServiceProvider::class,
 ```
 
 If you do run the package on Laravel 5.5+, [package auto-discovery](https://medium.com/@taylorotwell/package-auto-discovery-in-laravel-5-5-ea9e3ab20518) takes care of the magic of adding the service provider.
@@ -25,7 +25,7 @@ If you do run the package on Laravel 5.5+, [package auto-discovery](https://medi
 Optional you can publish the configuration to provide an own service provider stub.
 
 ```bash
-$ php artisan vendor:publish --provider="JeroenG\Packager\PackagerServiceProvider"
+$ php artisan vendor:publish --provider="michaeljberry\Packager\PackagerServiceProvider"
 ```
 
 ## Available commands
@@ -125,7 +125,7 @@ Please see [contributing.md](contributing.md) for details.
 
 ## Credits
 
-- [JeroenG][link-author]
+- [michaeljberry][link-author]
 - [All Contributors][link-contributors]
 
 ## License
@@ -133,11 +133,11 @@ Please see [contributing.md](contributing.md) for details.
 The EU Public License. Please see [license.md](license.md) for more information.
 
 
-[ico-version]: https://img.shields.io/packagist/v/jeroen-g/laravel-packager.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/michaeljberry/laravel-packager.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-EUPL-yellow.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/jeroen-g/laravel-packager.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/michaeljberry/laravel-packager.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/jeroen-g/laravel-packager
-[link-downloads]: https://packagist.org/packages/jeroen-g/laravel-packager
-[link-author]: https://github.com/Jeroen-G
+[link-packagist]: https://packagist.org/packages/michaeljberry/laravel-packager
+[link-downloads]: https://packagist.org/packages/michaeljberry/laravel-packager
+[link-author]: https://github.com/michaeljberry
 [link-contributors]: ../../contributors]
