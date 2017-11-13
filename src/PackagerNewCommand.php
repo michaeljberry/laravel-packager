@@ -53,7 +53,7 @@ class PackagerNewCommand extends Command
     public function handle()
     {
         // Start the progress bar
-        $bar = $this->helper->barSetup($this->output->createProgressBar(6));
+        $bar = $this->helper->barSetup($this->output->createProgressBar(5));
         $bar->start();
 
         // Common variables
@@ -64,15 +64,16 @@ class PackagerNewCommand extends Command
         } else {
             $vendor = $this->argument('vendor');
             $name = $this->argument('name');
-        }
-        $path = getcwd().'/vendor/';
-        $fullPath = $path.strtolower($vendor).'/'.strtolower($name);
+    }
+        $path = preg_replace( '~[/\\\\][^/\\\\]*[/\\\\]$~' , DIRECTORY_SEPARATOR , getcwd() . DIRECTORY_SEPARATOR
+            ) . 'packages' . DIRECTORY_SEPARATOR;
+        $fullPath = $path . strtolower($name);
         $requireSupport = '"illuminate/support": "~5.1",
         "php"';
 
         // Start creating the package
         $this->info('Creating package '.$vendor.'\\'.$name.'...');
-        $this->helper->checkExistingPackage($path, $vendor, $name);
+        $this->helper->checkExistingPackage($path, $name);
         $bar->advance();
 
         // Create the package directory
@@ -81,21 +82,21 @@ class PackagerNewCommand extends Command
         $bar->advance();
 
         // Create the vendor directory
-        $this->info('Creating vendor...');
-        $this->helper->makeDir($path.$vendor);
-        $bar->advance();
+//        $this->info('Creating vendor...');
+//        $this->helper->makeDir($path.$vendor);
+//        $bar->advance();
 
         // Get the skeleton repo from the PHP League
         $this->info('Downloading skeleton...');
         $this->helper->download($zipFile = $this->helper->makeFilename(), 'http://github.com/thephpleague/skeleton/archive/master.zip')
-             ->extract($zipFile, $path.$vendor)
+             ->extract($zipFile, $path)
              ->cleanUp($zipFile);
-        rename($path.strtolower($vendor).'/skeleton-master', $fullPath);
+        rename($path . 'skeleton-master', $fullPath);
         $bar->advance();
 
         // Creating a Laravel Service Provider in the src directory
         $this->info('Creating service provider...');
-        $newProvider = $fullPath.'/src/'.$name.'ServiceProvider.php';
+        $newProvider = $fullPath. DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR .$name.'ServiceProvider.php';
         $this->helper->replaceAndSave(
             \Config::get('packager.service_provider_stub', __DIR__.'/ServiceProvider.stub'),
             ['{{vendor}}', '{{name}}'],
@@ -106,7 +107,8 @@ class PackagerNewCommand extends Command
 
         // Replacing skeleton placeholders
         $this->info('Replacing skeleton placeholders...');
-        $this->helper->replaceAndSave($fullPath.'/src/SkeletonClass.php', 'namespace League\Skeleton;', 'namespace '.$vendor.'\\'.$name.';');
+        $this->helper->replaceAndSave($fullPath. DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'SkeletonClass.php', 'namespace 
+    League\Skeleton;', 'namespace '.$vendor.'\\'.$name.';');
         $search =   [
             ':vendor',
             ':package_name',
@@ -129,7 +131,7 @@ class PackagerNewCommand extends Command
             $vendor.'\\\\'.$name.'\\\\',
             $vendor.'\\\\'.$name.'\\\\Test\\\\'
         ];
-        $this->helper->replaceAndSave($fullPath.'/composer.json', $search, $replace);
+        $this->helper->replaceAndSave($fullPath . DIRECTORY_SEPARATOR . 'composer.json', $search, $replace);
         if ($this->option('i')) {
             $this->interactiveReplace($vendor, $name, $fullPath);
         }

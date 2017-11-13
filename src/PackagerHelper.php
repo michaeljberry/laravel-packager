@@ -78,15 +78,14 @@ class PackagerHelper
     /**
      * Check if the package already exists.
      *
-     * @param  string $path   Path to the package directory
-     * @param  string $vendor The vendor
-     * @param  string $name   Name of the package
-     *
-     * @return void          Throws error if package exists, aborts process
+     * @param  string $path Path to the package directory
+     * @param  string $name Name of the package
+     * @return void Throws error if package exists, aborts process
+     * @internal param string $vendor The vendor
      */
-    public function checkExistingPackage($path, $vendor, $name)
+    public function checkExistingPackage($path, $name)
     {
-        if (is_dir($path.strtolower($vendor).'/'.strtolower($name))) {
+        if (is_dir($path.strtolower($name))) {
             throw new RuntimeException('Package already exists');
         }
     }

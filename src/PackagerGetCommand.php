@@ -75,7 +75,7 @@ class PackagerGetCommand extends Command
 
         // Start creating the package
         $this->info('Creating package '.$vendor.'\\'.$name.'...');
-        $this->helper->checkExistingPackage($path, strtolower($vendor), strtolower($name));
+        $this->helper->checkExistingPackage($path, strtolower($name));
         $bar->advance();
 
         // Create the package directory
