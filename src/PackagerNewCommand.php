@@ -88,7 +88,7 @@ class PackagerNewCommand extends Command
 
         // Get the skeleton repo from the PHP League
         $this->info('Downloading skeleton...');
-        $this->helper->download($zipFile = $this->helper->makeFilename(), 'http://github.com/thephpleague/skeleton/archive/master.zip')
+        $this->helper->download($zipFile = $this->helper->makeFilename(), 'http://github.com/michaeljberry/skeleton/archive/master.zip')
              ->extract($zipFile, $path)
              ->cleanUp($zipFile);
         rename($path . 'skeleton-master', $fullPath);
@@ -110,6 +110,8 @@ class PackagerNewCommand extends Command
         $this->helper->replaceAndSave($fullPath. DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'SkeletonClass.php', 'namespace 
     League\Skeleton;', 'namespace '.$vendor.'\\'.$name.';');
         $search =   [
+            ':vendorup',
+            ':package_nameup',
             ':vendor',
             ':package_name',
             ':vendor\\\\:package_name\\\\',
@@ -123,6 +125,8 @@ class PackagerNewCommand extends Command
         $replace =  [
             $vendor,
             $name,
+            strtolower($vendor),
+            strtolower($name),
             $vendor.'\\\\'.$name.'\\\\',
             $vendor.'/'.$name,
             $vendor.'/'.$name,
